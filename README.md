@@ -1,0 +1,1 @@
+#So More clocks is the idea...here I made python code for a clock about Operating systems and Linux distributions...majorilly for fun...!!!That's it! you can run it the same way as we've shown on previous posts on issues folder.
