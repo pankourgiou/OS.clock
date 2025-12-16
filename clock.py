@@ -4,7 +4,7 @@ from datetime import datetime
 
 # List of OS/distro names corresponding to each hour
 os_names = [
-    "Ubuntu", "Windows", "macOS", "Android", "Harmony OS", "Laser OS",
+    "Ubuntu", "Windows", "Laser OS", "Android", "Harmony OS", "MacOS",
     "Mint", "Fedora", "Puppy", "Kodachi", "Zorin", "Xubuntu"
 ]
 
