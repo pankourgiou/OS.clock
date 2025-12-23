@@ -4,8 +4,8 @@ from datetime import datetime
 
 # List of OS/distro names corresponding to each hour
 os_names = [
-    "Ubuntu", "Windows", "Laser OS", "Android", "Harmony OS", "MacOS",
-    "Mint", "Fedora", "Puppy", "Kodachi", "Zorin", "Xubuntu"
+    "Ubuntu", "Windows", "Laser OS", "Android", "Harmony OS", "Mint",
+    "MacOS", "Zorin", "Puppy", "Xybuntu", "Fedora", "Kodachi"
 ]
 
 def draw_os_clock():
