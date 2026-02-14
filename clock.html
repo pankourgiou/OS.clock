@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OS Distro Clock</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #0a0f1f, #000);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  canvas {
+    border-radius: 50%;
+    background: linear-gradient(145deg, #111a2f, #02060f);
+    box-shadow: 0 0 40px rgba(0, 150, 255, 0.4), inset 0 0 25px rgba(0, 100, 255, 0.25);
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+  <h1>OS DISTRO CLOCK</h1>
+  <canvas id="clock" width="500" height="500"></canvas>
+</div>
+
+<script>
+const osNames = [
+  "Ubuntu", "Windows", "Laser OS", "Android", "Harmony OS", "Mint",
+  "MacOS", "Zorin", "Puppy", "Xybuntu", "Fedora", "Kodachi"
+];
+
+const canvas = document.getElementById("clock");
+const ctx = canvas.getContext("2d");
+
+function drawClock() {
+  const now = new Date();
+
+  const width = canvas.width;
+  const height = canvas.height;
+  const cx = width / 2;
+  const cy = height / 2;
+
+  ctx.clearRect(0, 0, width, height);
+
+  // Outer circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, 220, 0, Math.PI * 2);
+  ctx.strokeStyle = "#4da6ff";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // OS names
+  ctx.font = "bold 14px Segoe UI";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#ffffff";
+
+  osNames.forEach((name, i) => {
+    const angle = Math.PI / 2 - i * (Math.PI / 6);
+    const x = cx + 180 * Math.cos(angle);
+    const y = cy - 180 * Math.sin(angle);
+    ctx.fillText(name, x, y);
+  });
+
+  // Time
+  const hour = (now.getHours() % 12) + now.getMinutes() / 60;
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+
+  // Hour hand
+  const hourAngle = Math.PI / 2 - hour * (Math.PI / 6);
+  drawHand(hourAngle, 100, "#ff4d4d", 6);
+
+  // Minute hand
+  const minuteAngle = Math.PI / 2 - minute * (Math.PI / 30);
+  drawHand(minuteAngle, 150, "#00ccff", 4);
+
+  // Second hand
+  const secondAngle = Math.PI / 2 - second * (Math.PI / 30);
+  drawHand(secondAngle, 170, "#ffffff", 2);
+
+  // Center dot
+  ctx.beginPath();
+  ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+  ctx.fillStyle = "white";
+  ctx.fill();
+
+  function drawHand(angle, length, color, width) {
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + length * Math.cos(angle), cy - length * Math.sin(angle));
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.stroke();
+  }
+
+  requestAnimationFrame(drawClock);
+}
+
+
+drawClock();
+</script>
+</body>
+</html>
